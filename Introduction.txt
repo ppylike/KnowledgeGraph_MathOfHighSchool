@@ -1,0 +1,29 @@
+高考数学试题自动答题：
+文本表示+自动推理
+
+A simple Example:
+
+text (LaTex format): 
+等差数列$\{a_{n}\}$的前n项和为$S_{n}$，$a_{3}=3$，$S_{4}=10$，则$\sum_{k=1}^n 1/S_{k}=___$．
+
+semi_structured expression:
+[ArithematicProgression($\{a_{n}\}$), SumofProgression($\{a_{n}\}$, $S_{n}$), Equal($a_{3}$, 3), Equal($S_{4}$, 10), Asking($\sum_{k=1}^n 1/S_{k})]
+
+Rules:
+  Rule1:
+  ArithematicProgression(x), NthTerm(x)[n] --> NthTerm(x)[n] = NthTerm(x)[1] + (n-1)*CommonDifference(x)
+  Rule2:
+  ArithematicProgression(x), SumOfNthTerm(x)[n] --> SumOfNthTerm(x)[n] = NthTerm(x)[1] * n  + n*(n-1)*CommonDifference(x)/2
+
+Result Equations:
+NthTerm(a)[3] = NthTerm(a)[1] + (3-1)*CommonDifference(a)
+SumOfNthTerm(a)[4] = NthTerm(a)[1]*4 + 4*(4-1)*CommonDifference(a)/2
+NthTerm(a)[3] = 3
+SumOfNthTerm(a)[4] = 10
+SumOfNthTerm(a)[n] = n*NthTerm(a)[1] + n*(n-1)*CommonDifference(a)/2
+
+Solved Result:
+NthTerm(a)[1]=1, CommonDifference(a)=1, SumOfNthTerm(a)[n] = n*(n+1)/2
+
+类比知识图谱：
+实体识别，关系分类，自动推理
